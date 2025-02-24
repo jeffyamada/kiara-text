@@ -1,8 +1,9 @@
 'use client'
 
-import { forwardRef, Suspense, useImperativeHandle, useRef } from 'react'
-import { OrbitControls, PerspectiveCamera, View as ViewImpl } from '@react-three/drei'
 import { Three } from '@/helpers/components/Three'
+import { Environment, PerspectiveCamera, PresentationControls, View as ViewImpl } from '@react-three/drei'
+import { forwardRef, Suspense, useImperativeHandle, useRef } from 'react'
+import Lightformers from './Lightformers'
 
 export const Common = ({ color }) => (
   <Suspense fallback={null}>
@@ -23,8 +24,16 @@ const View = forwardRef(({ children, orbit, ...props }, ref) => {
       <div ref={localRef} {...props} />
       <Three>
         <ViewImpl track={localRef}>
-          {children}
-          {orbit && <OrbitControls />}
+          <Environment intensity={0.5} rotation={[Math.PI / 4, 0, 0]} frames={Infinity}>
+            <Lightformers />
+          </Environment>
+          <PresentationControls
+            global
+            speed={2}
+            cursor
+            azimuth={[-Infinity, Infinity]}
+            polar={[-Infinity, Infinity]}> {children}</PresentationControls>
+          {/* {orbit && <OrbitControls />} */}
         </ViewImpl>
       </Three>
     </>

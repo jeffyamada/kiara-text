@@ -1,8 +1,8 @@
 'use client'
 
-import { Canvas } from '@react-three/fiber'
-import { Preload } from '@react-three/drei'
 import { r3f } from '@/helpers/global'
+import { Preload } from '@react-three/drei'
+import { Canvas } from '@react-three/fiber'
 import * as THREE from 'three'
 
 export default function Scene({ ...props }) {
